@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    stages {
+        stage("Init") {
+            steps {
+                sh '''
+                echo "GIT_URL=https://github.com/BluDive-Technology-Limited/FlaskApp3.git" > /var/jenkins_home/context_env
+                echo "GIT_BRANCH=origin/main" >> /var/jenkins_home/context_env
+                '''
+            }
+        }
+        stage('Trigger Base Pipeline') {
+            steps {
+                build job: 'default_pipeline'
+            }
+        }
+    }
+}
+
